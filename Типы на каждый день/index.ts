@@ -125,3 +125,91 @@ function printId(id: number | string) {
   }
 
   
+  // Синонимы типов (type aliases)
+  type typePoint = {
+    x: number
+    y: number
+  }
+
+  function printCoord(pt: typePoint) {
+    console.log(`X: ${pt.x}, Y: ${pt.y}`)
+  }
+  
+  printCoord({ x: 100, y: 100 })
+
+  type UserInputSanitizedString = string
+
+  type ID = number | string
+
+function sanitizeInput(str: string): UserInputSanitizedString {
+  return sanitize(str)
+}
+
+// Создаем "обезвреженный" инпут
+let userInput = sanitizeInput(getInput())
+
+// По-прежнему имеем возможность изменять значение переменной
+userInput = 'new input'
+
+
+// Интерфейсы (interfaces)
+interface Point {
+  x: number
+  y: number
+}
+
+function printCoords(pt: Point) {
+  console.log(`Значение координаты 'x': ${pt.x}`)
+  console.log(`Значение координаты 'y': ${pt.y}`)
+}
+
+printCoords({ x: 3, y: 7 })
+
+interface Animal {
+  name: string
+}
+
+interface Bear extends Animal {
+  honey: boolean
+}
+
+const bear = getBear()
+bear.name
+bear.honey
+
+// Пример расширения типа с помощью пересечения (intersection):
+
+type Animal {
+  name: string
+}
+
+type Bear = Animal & {
+  honey: boolean
+}
+
+const bear = getBear()
+bear.name
+bear.honey
+
+interface Window {
+  title: string
+}
+
+interface Window {
+  ts: TypeScriptAPI
+}
+
+const src = 'const a = 'Hello World''
+window.ts.transpileModule(src, {})
+
+// Тип не может быть изменен после создания:
+
+type Window = {
+  title: string
+}
+
+type Window = {
+  ts: TypeScriptAPI
+}
+// Ошибка: повторяющийся идентификатор 'Window'.
+
